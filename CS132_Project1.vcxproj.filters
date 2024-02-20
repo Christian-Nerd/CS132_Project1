@@ -23,7 +23,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="rationalNumber.h">
+    <ClInclude Include="RationalNumber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

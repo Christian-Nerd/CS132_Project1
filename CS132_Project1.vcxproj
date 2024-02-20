@@ -131,7 +131,7 @@
     <ClCompile Include="rationalNumber.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="rationalNumber.h" />
+    <ClInclude Include="RationalNumber.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,35 +2,41 @@
 #define RN
 #include <iostream>
 using namespace std;
-class rationalNumber
+class RationalNumber
 {
 	public:
-		void setRationalNumber(); // Gets the rational number from the user
-		void getRationalNumber(); // Accessor function
-		double operator+(rationalNumber // Right hand side value 
+		void setRationalNumber(istream&); // Gets the rational number from the user
+		bool checkValidRationalNumber(string&); // Checks if a rational number is valid
+		void outputRationalNumber(ostream&); // Outputs rational number function
+		void getNum();
+		void setNum();
+		void getDen();
+		void setDen();
+		int numerator, demoniator; // These numbers represent the top & bottom part of the fraction
+		double operator+(RationalNumber // Right hand side value 
 			); // Addition operator
-		double operator-(rationalNumber // Right hand side value
+		double operator-(RationalNumber // Right hand side value
 		); // Subtraction operator
-		double operator*(rationalNumber // Right hand side value
+		double operator*(RationalNumber // Right hand side value
 		); // Multiplication operator
-		double operator/(rationalNumber // Right hand side value
+		double operator/(RationalNumber // Right hand side value
 		); // Division operator
-		double operator==(rationalNumber // Right hand side value
+		double operator==(RationalNumber // Right hand side value
 		); // Equlaity Operator
-		double operator<=(rationalNumber // Right hand side value
+		double operator<=(RationalNumber // Right hand side value
 		); // Less than or equal to operator
-		double operator>=(rationalNumber // Right hand side value
+		double operator>=(RationalNumber // Right hand side value
 		); // Greater than or equal to operator
-		double operator<(rationalNumber // Right hand side value
+		double operator<(RationalNumber // Right hand side value
 		); // Less than oeprator
-		double operator>(rationalNumber // Right hand side value
+		double operator>(RationalNumber // Right hand side value
 		); // Greater than operator
-		ostream& operator<<(rationalNumber // Right hand side value
+		ostream& operator<<(RationalNumber // Right hand side value
 		); // Stream insertion operator
-		istream& operator>>(rationalNumber // Right hand side value
+		istream& operator>>(RationalNumber // Right hand side value
 		); // Stream extraction operator
 	private:
-		string rationalNumber; // This is the rational number
+		string RationalNumber; // This is the rational number
 };
 #endif
 
