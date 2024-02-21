@@ -124,3 +124,13 @@ bool RationalNumber::operator>(RationalNumber& num2)
 {
 	return ((double)numerator / (double)denominator) > ((double)num2.getNum() / (double)num2.getDen());
 }
+ostream& operator<<(ostream& out, RationalNumber& num) 
+{
+	num.outputRationalNumber(out);
+	return out;
+}
+istream& operator>>(istream& in, RationalNumber& num) 
+{
+	num.setRationalNumber(in);
+	return in;
+} 

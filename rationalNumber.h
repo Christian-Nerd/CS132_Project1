@@ -31,9 +31,11 @@ class RationalNumber
 		); // Less than oeprator
 		bool operator>(RationalNumber& // Right hand side value
 		); // Greater than operator
-		ostream& operator<<(RationalNumber& // Right hand side value
+		friend ostream& operator<<(ostream&, // left hand side value
+								   RationalNumber& // Right hand side value
 		); // Stream insertion operator
-		istream& operator>>(RationalNumber& // Right hand side value
+		friend istream& operator>>(istream&, // Left hand side value
+								   RationalNumber& // Right hand side value
 		); // Stream extraction operator
 	private:
 		string num; // This is the rational number
