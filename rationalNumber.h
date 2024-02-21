@@ -23,13 +23,13 @@ class RationalNumber
 		); // Division operator
 		bool operator==(RationalNumber& // Right hand side value
 		); // Equlaity Operator
-		RationalNumber operator<=(RationalNumber& // Right hand side value
+		bool operator<=(RationalNumber& // Right hand side value
 		); // Less than or equal to operator
-		RationalNumber operator>=(RationalNumber& // Right hand side value
+		bool operator>=(RationalNumber& // Right hand side value
 		); // Greater than or equal to operator
-		RationalNumber operator<(RationalNumber& // Right hand side value
+		bool operator<(RationalNumber& // Right hand side value
 		); // Less than oeprator
-		RationalNumber operator>(RationalNumber& // Right hand side value
+		bool operator>(RationalNumber& // Right hand side value
 		); // Greater than operator
 		ostream& operator<<(RationalNumber& // Right hand side value
 		); // Stream insertion operator

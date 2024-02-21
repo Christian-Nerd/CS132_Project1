@@ -108,3 +108,19 @@ bool RationalNumber::operator==(RationalNumber& num2)
 {
 	return (numerator == num2.getNum() && denominator == num2.getDen());
 }
+bool RationalNumber::operator<=(RationalNumber& num2) 
+{
+	return ((double)numerator / (double)denominator) <= ((double)num2.getNum() / (double)num2.getDen());
+}
+bool RationalNumber::operator<=(RationalNumber& num2) 
+{
+	return ((double)numerator / (double)denominator) >= ((double)num2.getNum() / (double)num2.getDen());
+}
+bool RationalNumber::operator<(RationalNumber& num2) 
+{
+	return ((double)numerator / (double)denominator) < ((double)num2.getNum() / (double)num2.getDen());
+}
+bool RationalNumber::operator>(RationalNumber& num2) 
+{
+	return ((double)numerator / (double)denominator) > ((double)num2.getNum() / (double)num2.getDen());
+}
