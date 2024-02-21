@@ -7,17 +7,17 @@ class RationalNumber
 	public:
 		void setRationalNumber(istream&); // Gets the rational number from the user
 		bool checkValidRationalNumber(string&); // Checks if a rational number is valid
-		void simplifyRationalNumber(); // Simplifies the rational number
+		void simplifyRationalNumber(RationalNumber&); // Simplifies the rational number
 		void outputRationalNumber(ostream&); // Outputs rational number function
 		int getNum(); // Gets Numerator
 		void setNum(int); // Sets Numerator
 		int getDen(); // Gets Denomiator
 		void setDen(int); // Sets Denomiator
-		double operator+(RationalNumber& // Right hand side value 
+		RationalNumber operator+(RationalNumber& // Right hand side value 
 			); // Addition operator
 		double operator-(RationalNumber& // Right hand side value
 		); // Subtraction operator
-		double operator*(RationalNumber& // Right hand side value
+		 double operator*(RationalNumber& // Right hand side value
 		); // Multiplication operator
 		double operator/(RationalNumber& // Right hand side value
 		); // Division operator

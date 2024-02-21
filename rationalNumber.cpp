@@ -22,12 +22,12 @@ bool RationalNumber::checkValidRationalNumber(string& num)
 	}
 	return true;
 }
-void RationalNumber::simplifyRationalNumber()
+void simplifyRationalNumber(RationalNumber& num)
 {
 	// Factor the fraction
-	while (numerator % demoniator != 0)
+	while (num.getNum() % num.getDen() != 0)
 	{
-		demoniator = numerator % demoniator; // Sets demoniator to the remainder of the division
+		num.setDen(numerator % demoniator); // Sets demoniator to the remainder of the division
 		numerator = demoniator; // Sets numerator to the divisor
 	}
 	// Simplify the fraction
@@ -55,9 +55,22 @@ void RationalNumber::setDen(int value)
 	demoniator = value;
 }
 
-double RationalNumber::operator+(RationalNumber& num2)
+RationalNumber operator+(RationalNumber& num2)
 {
 	RationalNumber output;
-	return 0;
+	// Multiples numerator and demoniator of both numbers by each other's demonator
+	this->setNum(this->getNum() * num2.getDen());
+	this->setDen(this->getDen() * num2.getDen());
+	num2.setNum(num2.getNum() * this->getDen());
+	num2.setDen(num2.getDen() * this->getDen());
+	output.setNum(num2.getNum() + this->getNum());
+	simplifyRationalNumber(*this);
+	simplifyRationalNumber(num2);
+	simplifyRationalNumber(output);
+	return output;
+}
+double RationalNumber::operator-(RationalNumber& num2) 
+{
+
 }
 
