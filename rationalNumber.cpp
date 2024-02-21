@@ -22,21 +22,21 @@ bool RationalNumber::checkValidRationalNumber(string& num)
 	}
 	return true;
 }
-void simplifyRationalNumber(RationalNumber& num)
+void RationalNumber::simplifyRationalNumber(RationalNumber& num)
 {
 	// Factor the fraction
 	while (num.getNum() % num.getDen() != 0)
 	{
-		num.setDen(numerator % demoniator); // Sets demoniator to the remainder of the division
-		numerator = demoniator; // Sets numerator to the divisor
+		num.setDen(numerator % denominator); // Sets denominator to the remainder of the division
+		numerator = denominator; // Sets numerator to the divisor
 	}
 	// Simplify the fraction
-	numerator /= demoniator;
-	demoniator /= demoniator;
+	numerator /= denominator;
+	denominator /= denominator;
 }
 void RationalNumber::outputRationalNumber(ostream& out) 
 {
-	out << " " << numerator << "/" << demoniator;
+	out << " " << numerator << "/" << denominator;
 }
 int RationalNumber::getNum() 
 {
@@ -48,29 +48,63 @@ void RationalNumber::setNum(int value)
 }
 int RationalNumber::getDen() 
 {
-	return demoniator;
+	return denominator;
 }
 void RationalNumber::setDen(int value) 
 {
-	demoniator = value;
+	denominator = value;
 }
 
-RationalNumber operator+(RationalNumber& num2)
+RationalNumber RationalNumber::operator+(RationalNumber& num2)
 {
 	RationalNumber output;
-	// Multiples numerator and demoniator of both numbers by each other's demonator
-	this->setNum(this->getNum() * num2.getDen());
-	this->setDen(this->getDen() * num2.getDen());
-	num2.setNum(num2.getNum() * this->getDen());
-	num2.setDen(num2.getDen() * this->getDen());
-	output.setNum(num2.getNum() + this->getNum());
+	// Multiples numerator and denominator of both numbers by each other's demonator
+	numerator *= num2.getDen();
+	denominator *= num2.getDen();
+	num2.setNum(num2.getNum() * denominator);
+	num2.setDen(num2.getDen() * denominator);
+	// Set the output
+	output.setNum(num2.getNum() + numerator);
+	output.setDen(denominator);
+	//Simplify the fraction after the operation
 	simplifyRationalNumber(*this);
 	simplifyRationalNumber(num2);
 	simplifyRationalNumber(output);
 	return output;
 }
-double RationalNumber::operator-(RationalNumber& num2) 
+RationalNumber RationalNumber::operator-(RationalNumber& num2) 
 {
-
+	RationalNumber output;
+	// Multiples numerator and denominator of both numbers by each other's demonator
+	numerator *= num2.getDen();
+	denominator *= num2.getDen();
+	num2.setNum(num2.getNum() * denominator);
+	num2.setDen(num2.getDen() * denominator);
+	// Set the output
+	output.setNum(num2.getNum() + numerator);
+	output.setDen(denominator);
+	//SImplify the fraction after the operation
+	simplifyRationalNumber(*this);
+	simplifyRationalNumber(num2);
+	simplifyRationalNumber(output);
+	return output;
 }
-
+RationalNumber RationalNumber::operator* (RationalNumber& num2) 
+{
+	RationalNumber output;
+	output.setNum(numerator * num2.getNum());
+	simplifyRationalNumber(output);
+	return output;
+}
+RationalNumber RationalNumber::operator/ (RationalNumber& num2) 
+{
+	RationalNumber output;
+	output.setNum(numerator / num2.getDen());
+	output.setDen(numerator / num2.getNum());
+	simplifyRationalNumber(output);
+	return output;
+}
+bool RationalNumber::operator==(RationalNumber& num2) 
+{
+	return (numerator == num2.getNum() && denominator == num2.getDen());
+}

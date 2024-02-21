@@ -15,21 +15,21 @@ class RationalNumber
 		void setDen(int); // Sets Denomiator
 		RationalNumber operator+(RationalNumber& // Right hand side value 
 			); // Addition operator
-		double operator-(RationalNumber& // Right hand side value
+		RationalNumber operator-(RationalNumber& // Right hand side value
 		); // Subtraction operator
-		 double operator*(RationalNumber& // Right hand side value
+		RationalNumber operator*(RationalNumber& // Right hand side value
 		); // Multiplication operator
-		double operator/(RationalNumber& // Right hand side value
+		RationalNumber operator/(RationalNumber& // Right hand side value
 		); // Division operator
-		double operator==(RationalNumber& // Right hand side value
+		bool operator==(RationalNumber& // Right hand side value
 		); // Equlaity Operator
-		double operator<=(RationalNumber& // Right hand side value
+		RationalNumber operator<=(RationalNumber& // Right hand side value
 		); // Less than or equal to operator
-		double operator>=(RationalNumber& // Right hand side value
+		RationalNumber operator>=(RationalNumber& // Right hand side value
 		); // Greater than or equal to operator
-		double operator<(RationalNumber& // Right hand side value
+		RationalNumber operator<(RationalNumber& // Right hand side value
 		); // Less than oeprator
-		double operator>(RationalNumber& // Right hand side value
+		RationalNumber operator>(RationalNumber& // Right hand side value
 		); // Greater than operator
 		ostream& operator<<(RationalNumber& // Right hand side value
 		); // Stream insertion operator
@@ -37,7 +37,7 @@ class RationalNumber
 		); // Stream extraction operator
 	private:
 		string num; // This is the rational number
-		int numerator = 0, demoniator = 1; // These numbers represent the top & bottom part of the fraction
+		int numerator = 0, denominator = 1; // These numbers represent the top & bottom part of the fraction
 };
 #endif
 
