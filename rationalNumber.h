@@ -13,7 +13,7 @@ class RationalNumber
 		void setNum(int); // Sets Numerator
 		int getDen(); // Gets Denomiator
 		void setDen(int); // Sets Denomiator
-		friend double operator+(RationalNumber& // Right hand side value 
+		double operator+(RationalNumber& // Right hand side value 
 			); // Addition operator
 		double operator-(RationalNumber& // Right hand side value
 		); // Subtraction operator
@@ -36,7 +36,7 @@ class RationalNumber
 		istream& operator>>(RationalNumber& // Right hand side value
 		); // Stream extraction operator
 	private:
-		string RationalNumber; // This is the rational number
+		string num; // This is the rational number
 		int numerator = 0, demoniator = 1; // These numbers represent the top & bottom part of the fraction
 };
 #endif

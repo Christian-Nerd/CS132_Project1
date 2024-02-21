@@ -55,8 +55,9 @@ void RationalNumber::setDen(int value)
 	demoniator = value;
 }
 
-double operator+(RationalNumber& num2)
+double RationalNumber::operator+(RationalNumber& num2)
 {
 	RationalNumber output;
+	return 0;
 }
 
