@@ -2,10 +2,17 @@
 //
 
 #include <iostream>
-
+#include "RationalNumber.h"
 int main()
 {
-    std::cout << "Hello World!\n";
+	bool choice = true;
+	RationalNumber num;
+	while (choice) 
+	{
+		cout << "Hello user this is a rational number processor.";
+		cout << "To use you must input a rational numbber in the form int/int any integers are automatically processed as int/1.";
+
+	}
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

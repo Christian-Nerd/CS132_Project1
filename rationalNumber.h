@@ -1,6 +1,7 @@
 #ifndef RN
 #define RN
 #include <iostream>
+#include <string>
 using namespace std;
 class RationalNumber
 {

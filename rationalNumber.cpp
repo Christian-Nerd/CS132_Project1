@@ -1,13 +1,20 @@
 #include "RationalNumber.h"
-
 void RationalNumber::setRationalNumber(istream& in) 
 {
 	string rationalNumber; // A rational Number in the format int/int
+	// As long as the inputted number is invalid keep repeating inputting the number
 	do
 	{
 		in >> rationalNumber;
 	} 
 	while (checkValidRationalNumber(rationalNumber));
+	// If an integer is inputted set the denominator to zero
+	if (rationalNumber.find_first_of('/') == -1)
+	{
+		numerator == std::stoi(rationalNumber);
+		denominator == 1;
+		return;
+	}
 } // Gets the rational number from the user
 bool RationalNumber::checkValidRationalNumber(string& num) 
 {
@@ -17,6 +24,8 @@ bool RationalNumber::checkValidRationalNumber(string& num)
 		if (isspace(num.at(i)) || isalpha(num.at(i)))
 		{
 			cout << " Invalid rational number as it must be in the form \"int/int\" with no whitespace.";
+			cin.ignore(INT_MAX);
+			cin.clear();
 			return false;
 		}
 	}
