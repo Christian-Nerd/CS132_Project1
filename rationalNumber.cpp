@@ -37,11 +37,11 @@ void RationalNumber::simplifyRationalNumber(RationalNumber& num)
 	while (num.getNum() % num.getDen() != 0)
 	{
 		num.setDen(numerator % denominator); // Sets denominator to the remainder of the division
-		numerator = denominator; // Sets numerator to the divisor
+		num.setNum(denominator); // Sets numerator to the divisor
 	}
 	// Simplify the fraction
-	numerator /= denominator;
-	denominator /= denominator;
+	num.setNum(num.getNum()/num.getDen());
+	num.setDen(num.getDen()/denominator);
 }
 void RationalNumber::outputRationalNumber(ostream& out) 
 {
