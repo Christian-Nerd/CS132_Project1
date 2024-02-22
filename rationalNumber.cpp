@@ -36,12 +36,12 @@ void RationalNumber::simplifyRationalNumber(RationalNumber& num)
 	// Factor the fraction
 	while (num.getNum() % num.getDen() != 0)
 	{
-		num.setDen(numerator % denominator); // Sets denominator to the remainder of the division
-		num.setNum(denominator); // Sets numerator to the divisor
+		num.setDen(num.getNum() % num.getDen()); // Sets denominator to the remainder of the division
+		num.setNum(num.getDen()); // Sets numerator to the divisor
 	}
 	// Simplify the fraction
 	num.setNum(num.getNum()/num.getDen());
-	num.setDen(num.getDen()/denominator);
+	num.setDen(num.getDen()/num.getDen());
 }
 void RationalNumber::outputRationalNumber(ostream& out) 
 {
@@ -102,6 +102,7 @@ RationalNumber RationalNumber::operator* (RationalNumber& num2)
 {
 	RationalNumber output;
 	output.setNum(numerator * num2.getNum());
+	output.setDen(denominator);
 	simplifyRationalNumber(output);
 	return output;
 }
@@ -121,7 +122,7 @@ bool RationalNumber::operator<=(RationalNumber& num2)
 {
 	return ((double)numerator / (double)denominator) <= ((double)num2.getNum() / (double)num2.getDen());
 }
-bool RationalNumber::operator<=(RationalNumber& num2) 
+bool RationalNumber::operator>=(RationalNumber& num2) 
 {
 	return ((double)numerator / (double)denominator) >= ((double)num2.getNum() / (double)num2.getDen());
 }
@@ -143,3 +144,7 @@ istream& operator>>(istream& in, RationalNumber& num)
 	num.setRationalNumber(in);
 	return in;
 } 
+bool doesUserContinue() 
+{
+	
+}

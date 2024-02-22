@@ -18,7 +18,7 @@
     <ClCompile Include="CS132_Project1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rationalNumber.cpp">
+    <ClCompile Include="RationalNumber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -14,6 +14,7 @@ class RationalNumber
 		void setNum(int); // Sets Numerator
 		int getDen(); // Gets Denomiator
 		void setDen(int); // Sets Denomiator
+		bool doesUserContinue();
 		RationalNumber operator+(RationalNumber& // Right hand side value 
 			); // Addition operator
 		RationalNumber operator-(RationalNumber& // Right hand side value

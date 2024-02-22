@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CS132_Project1.cpp" />
-    <ClCompile Include="rationalNumber.cpp" />
+    <ClCompile Include="RationalNumber.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RationalNumber.h" />

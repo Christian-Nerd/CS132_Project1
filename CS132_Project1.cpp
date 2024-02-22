@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "RationalNumber.h"
+#include <algorithm>
 int main()
 {
 	bool choice = true;
@@ -12,13 +13,15 @@ int main()
 	while (choice) 
 	{
 		string opselection; // User's operation choice
+		// Convert selection to lower case ( in case user decises to quit
+		std::transform(opselection.begin(), opselection.end(), opselection.begin(), tolower); 
 		num.setRationalNumber(cin);
 		cout << " input your operation ";
 		cin >> opselection;
 		opselection = opselection.substr(0, 1);
-		if (isspace(opselection[1])) 
+		if (isspace(opselection[1]))
 		{
-			switch (opselection[0]) 
+			switch (opselection[0])
 			{
 			case '+':
 				cout << "Great please input your next operand";
@@ -31,18 +34,18 @@ int main()
 			case '<':
 				if (!isspace(opselection[1]) && (opselection[1] == '<'))
 					cout << num;
-				else if(!isspace(opselection[1]) 
+				else if (!isspace(opselection[1]))
 				{
 					cout << "Great please input your next operand";
 					num1.setRationalNumber(cin);
-					if(num <= num1)
+					if (num <= num1)
 						cout << "true";
 					else
 						cout << "false";
 				}
-				else if (isspace(opselection[1]) 
+				else if (isspace(opselection[1]))
 				{
-					if(num < num1)
+					if (num < num1)
 						cout << "true";
 					else
 						cout << "false";
@@ -55,28 +58,31 @@ int main()
 					cin >> num1;
 					cout << endl << num1;
 				}
-				else if(!isspace(opselection[1]) 
+				else if (!isspace(opselection[1]))
 				{
 					cout << "Great please input your next operand";
 					num1.setRationalNumber(cin);
-					if(num >= num1)
+					if (num >= num1)
 						cout << "true";
 					else
 						cout << "false";
 				}
-				else if (isspace(opselection[1]) 
+				else if (isspace(opselection[1]))
 				{
-					if(num > num1)
+					if (num > num1)
 						cout << "true";
 					else
 						cout << "false";
 				}
 				break;
 			case '*':
+			{
 				cout << "Great please input your next operand: ";
-					num1.setRationalNumber(cin);
-					cout << (num * num1);
+				num1.setRationalNumber(cin);
+				RationalNumber num2 = num * num1;
+				cout << num2;
 				break;
+			}
 			case '/':
 				cout << "Great please input your next operand: ";
 				num1.setRationalNumber(cin);
@@ -86,6 +92,9 @@ int main()
 				break;
 			}
 		}
+		// makes loop exit if user wants to stop
+		else if (opselection == "exit" || opselection == "stop" || opselection == "quit")
+			choice == false;
 	}
 }
 
