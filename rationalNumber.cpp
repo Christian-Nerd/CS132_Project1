@@ -26,16 +26,16 @@ bool RationalNumber::checkValidRationalNumber(string& num)
 	int SlashCount = 0;
 	for (int i = 0; i < num.size(); i++) 
 	{
-		// Checks if the inputed number has whitespace or alphabetic character
-		if (isspace(num.at(i)) || isalpha(num.at(i)) || num.at(i) == '.' || SlashCount > 1)
+		// Checks if the inputed number has whitespace or alphabetic character, has a decimal point, has too many slashes, or has a 0 denominator
+		if (isspace(num.at(i)) || isalpha(num.at(i)) || num.at(i) == '.' || SlashCount > 1 || (i + 1 <= num.size() && num.at(i) == '/' && isspace(num.at(i+1) || num.at(i+1) == '0')))
 		{
-			cout << " Invalid rational number as it must be in the form \"int/int\" with no whitespace.";
+			cout << " Invalid rational number as it must be in the form \"int/int\" with no whitespace and non-zero denominator.";
 			cout << endl;
 			cin.clear();
 			cin.ignore(INT_MAX, '\n');
 			return false;
 		}
-		if (num[i] == '/')
+		if(num.at(i) == '/')
 			SlashCount++;
 	}
 	return true;

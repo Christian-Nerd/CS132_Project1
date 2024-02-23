@@ -3,7 +3,7 @@
 #include "RationalNumber.h"
 int main()
 {
-	bool choice = true;
+	bool choice = true, ValidOperator = true;
 	RationalNumber num, num1, num2;
 	cout << "Hello user this is a rational number processor." << endl;
 	cout << "To use you must input a rational numbber in the form int/int any integers are automatically";
@@ -12,29 +12,33 @@ int main()
 	{
 		string opselection; // User's operation choice
 		// Convert selection to lower case ( in case user decises to quit
-		std::transform(opselection.begin(), opselection.end(), opselection.begin(), tolower); 
-		num.setRationalNumber(cin);
+		if(ValidOperator)
+			num.setRationalNumber(cin); // This is so that
 		cout << " input your operation ";
 		cin >> opselection;
 		opselection = opselection.substr(0, 2);
+		std::transform(opselection.begin(), opselection.end(), opselection.begin(), tolower); 
 		if (isspace(opselection[1]) || opselection.size() == 1)
 		{
 			switch (opselection[0])
 			{
 			case '+':
 				cout << "Great please input your next operand: ";
+				ValidOperator = true;
 				num1.setRationalNumber(cin);
 				num2 = num1 + num;
 				cout << num2;
 				break;
 			case '-':
 				cout << "Great please input your next operand ";
+				ValidOperator = true;
 				num1.setRationalNumber(cin);
 				num2 = num1 - num;
 				cout << num2;
 				break;
 			case '<':
 				cout << "Great please input your next operand: ";
+				ValidOperator = true;
 				num1.setRationalNumber(cin);
 				if (num < num1)
 					cout << "true";
@@ -43,6 +47,7 @@ int main()
 				break;
 			case '>':
 				cout << "Great please input your next operand: ";
+				ValidOperator = true;
 				num1.setRationalNumber(cin);
 				if (num > num1)
 					cout << "true";
@@ -54,6 +59,7 @@ int main()
 				num1.setRationalNumber(cin);
 				num2 = num * num1;
 				cout << num2;
+				ValidOperator = true;
 				break;
 				
 			case '/':
@@ -61,11 +67,13 @@ int main()
 				num1.setRationalNumber(cin);
 				num2 = num / num1;
 				cout << num2;
+				ValidOperator = true;
 				break;
 			default:
 				cerr << endl << "Invalid operator." << endl;
 				cin.clear();
 				cin.ignore(INT_MAX, '\n');
+				ValidOperator = false;
 				continue;
 				break;
 			}
@@ -75,6 +83,7 @@ int main()
 			if (opselection == "<=")
 			{
 				cout << "Great please input your next operand: ";
+				ValidOperator = true;
 				num1.setRationalNumber(cin);
 				if(num <= num1)
 					cout << "true";
@@ -84,15 +93,26 @@ int main()
 			else if (opselection == ">=")
 			{
 				cout << "Great please input your next operand: ";
+				ValidOperator = true;
 				num1.setRationalNumber(cin);
 				if(num >= num1)
 					cout << "true";
 				else
 					cout << "false";
 			}
+			else if (opselection == "==")
+			{
+				cout << "Great please input your next operand: ";
+				ValidOperator = true;
+				num1.setRationalNumber(cin);
+				if(num == num1)
+					cout << "true";
+				else
+					cout << "false";
+			}
 			else if (opselection == ">>")
 			{
-				//cout << "Great please input your next operand";
+				ValidOperator = true;
 				cin >> num1;
 				if (!cin)
 				{
@@ -103,6 +123,7 @@ int main()
 			}
 			else if (opselection == "<<")
 			{
+				ValidOperator = true;
 				cout << endl << num;
 			}
 			else 
@@ -111,6 +132,7 @@ int main()
 				cout << endl;
 				cin.clear();
 				cin.ignore(INT_MAX, '\n');
+				ValidOperator = false;
 				continue;
 			}
 		}
