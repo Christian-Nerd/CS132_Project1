@@ -7,12 +7,12 @@ void RationalNumber::setRationalNumber(istream& in)
 	{
 		in >> rationalNumber;
 	} 
-	while (checkValidRationalNumber(rationalNumber));
+	while (!checkValidRationalNumber(rationalNumber));
 	// If an integer is inputted set the denominator to zero
 	if (rationalNumber.find_first_of('/') == -1)
 	{
-		numerator == std::stoi(rationalNumber);
-		denominator == 1;
+		numerator = std::stoi(rationalNumber);
+		denominator = 1;
 		return;
 	}
 } // Gets the rational number from the user
@@ -21,7 +21,7 @@ bool RationalNumber::checkValidRationalNumber(string& num)
 	for (int i = 0; i < num.size(); i++) 
 	{
 		// Checks if the inputed number has whitespace or alphabetic characters
-		if (isspace(num.at(i)) || isalpha(num.at(i)))
+		if (isspace(num.at(i)) || isalpha(num.at(i)) || num.at(i) == '.')
 		{
 			cout << " Invalid rational number as it must be in the form \"int/int\" with no whitespace.";
 			cin.ignore(INT_MAX);
@@ -90,7 +90,7 @@ RationalNumber RationalNumber::operator-(RationalNumber& num2)
 	num2.setNum(num2.getNum() * denominator);
 	num2.setDen(num2.getDen() * denominator);
 	// Set the output
-	output.setNum(num2.getNum() + numerator);
+	output.setNum(numerator - num2.getNum() );
 	output.setDen(denominator);
 	//SImplify the fraction after the operation
 	simplifyRationalNumber(*this);
@@ -109,8 +109,8 @@ RationalNumber RationalNumber::operator* (RationalNumber& num2)
 RationalNumber RationalNumber::operator/ (RationalNumber& num2) 
 {
 	RationalNumber output;
-	output.setNum(numerator / num2.getDen());
-	output.setDen(numerator / num2.getNum());
+	output.setNum(numerator * num2.getDen());
+	output.setDen(denominator * num2.getNum());
 	simplifyRationalNumber(output);
 	return output;
 }
@@ -146,5 +146,5 @@ istream& operator>>(istream& in, RationalNumber& num)
 } 
 bool doesUserContinue() 
 {
-	
+	return false;
 }

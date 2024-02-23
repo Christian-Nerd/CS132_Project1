@@ -7,9 +7,10 @@
 int main()
 {
 	bool choice = true;
-	RationalNumber num, num1;
-		cout << "Hello user this is a rational number processor.";
-		cout << "To use you must input a rational numbber in the form int/int any integers are automatically processed as int/1.";
+	RationalNumber num, num1, num2;
+	cout << "Hello user this is a rational number processor." << endl;
+	cout << "To use you must input a rational numbber in the form int/int any integers are automatically";
+	cout << " processed as int/int." << endl;
 	while (choice) 
 	{
 		string opselection; // User's operation choice
@@ -19,17 +20,21 @@ int main()
 		cout << " input your operation ";
 		cin >> opselection;
 		opselection = opselection.substr(0, 1);
-		if (isspace(opselection[1]))
+		if (isspace(opselection[1]) || opselection.size() == 1)
 		{
 			switch (opselection[0])
 			{
 			case '+':
 				cout << "Great please input your next operand";
 				num1.setRationalNumber(cin);
+				num2 = num1 + num;
+				cout << num2;
 				break;
 			case '-':
 				cout << "Great please input your next operand";
 				num1.setRationalNumber(cin);
+				num2 = num1 - num;
+				cout << num2;
 				break;
 			case '<':
 				if (!isspace(opselection[1]) && (opselection[1] == '<'))
@@ -76,16 +81,17 @@ int main()
 				}
 				break;
 			case '*':
-			{
 				cout << "Great please input your next operand: ";
 				num1.setRationalNumber(cin);
-				RationalNumber num2 = num * num1;
+				num2 = num * num1;
 				cout << num2;
 				break;
-			}
+				
 			case '/':
 				cout << "Great please input your next operand: ";
 				num1.setRationalNumber(cin);
+				num2 = num / num1;
+				cout << num2;
 				break;
 			default:
 				cerr << endl << "Invalid operator." << endl;
@@ -94,7 +100,7 @@ int main()
 		}
 		// makes loop exit if user wants to stop
 		else if (opselection == "exit" || opselection == "stop" || opselection == "quit")
-			choice == false;
+			choice = false;
 	}
 }
 
