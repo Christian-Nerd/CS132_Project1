@@ -1,9 +1,6 @@
 // CS132_Project1.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
-#include <iostream>
 #include "RationalNumber.h"
-#include <algorithm>
 int main()
 {
 	bool choice = true;
@@ -19,7 +16,7 @@ int main()
 		num.setRationalNumber(cin);
 		cout << " input your operation ";
 		cin >> opselection;
-		opselection = opselection.substr(0, 1);
+		opselection = opselection.substr(0, 2);
 		if (isspace(opselection[1]) || opselection.size() == 1)
 		{
 			switch (opselection[0])
@@ -31,54 +28,26 @@ int main()
 				cout << num2;
 				break;
 			case '-':
-				cout << "Great please input your next operand";
+				cout << "Great please input your next operand ";
 				num1.setRationalNumber(cin);
 				num2 = num1 - num;
 				cout << num2;
 				break;
 			case '<':
-				if (!isspace(opselection[1]) && (opselection[1] == '<'))
-					cout << num;
-				else if (!isspace(opselection[1]))
-				{
-					cout << "Great please input your next operand";
-					num1.setRationalNumber(cin);
-					if (num <= num1)
-						cout << "true";
-					else
-						cout << "false";
-				}
-				else if (isspace(opselection[1]))
-				{
-					if (num < num1)
-						cout << "true";
-					else
-						cout << "false";
-				}
+				cout << "Great please input your next operand: ";
+				num1.setRationalNumber(cin);
+				if (num < num1)
+					cout << "true";
+				else
+					cout << "false";
 				break;
 			case '>':
-				if (!isspace(opselection[1]) && (opselection[1] == '>'))
-				{
-					cout << "Great please input your next operand";
-					cin >> num1;
-					cout << endl << num1;
-				}
-				else if (!isspace(opselection[1]))
-				{
-					cout << "Great please input your next operand";
-					num1.setRationalNumber(cin);
-					if (num >= num1)
-						cout << "true";
-					else
-						cout << "false";
-				}
-				else if (isspace(opselection[1]))
-				{
-					if (num > num1)
-						cout << "true";
-					else
-						cout << "false";
-				}
+				cout << "Great please input your next operand: ";
+				num1.setRationalNumber(cin);
+				if (num > num1)
+					cout << "true";
+				else
+					cout << "false";
 				break;
 			case '*':
 				cout << "Great please input your next operand: ";
@@ -95,13 +64,61 @@ int main()
 				break;
 			default:
 				cerr << endl << "Invalid operator." << endl;
+				cin.clear();
+				cin.ignore(INT_MAX, '\n');
+				continue;
 				break;
 			}
 		}
+		else
+		{
+			if (opselection == "<=")
+			{
+				cout << "Great please input your next operand: ";
+				num1.setRationalNumber(cin);
+				if(num <= num1)
+					cout << "true";
+				else
+					cout << "false";
+			}
+			else if (opselection == ">=")
+			{
+				cout << "Great please input your next operand: ";
+				num1.setRationalNumber(cin);
+				if(num >= num1)
+					cout << "true";
+				else
+					cout << "false";
+			}
+			else if (opselection == ">>")
+			{
+				//cout << "Great please input your next operand";
+				cin >> num1;
+				if (!cin)
+				{
+					cin.clear();
+					cin.ignore(INT_MAX, '\n');
+				}
+				cout << endl << num1;
+			}
+			else if (opselection == "<<")
+			{
+				cout << endl << num;
+			}
+			else 
+			{
+				cout << " Invalid operator please renter.";
+				cout << endl;
+				cin.clear();
+				cin.ignore(INT_MAX, '\n');
+				continue;
+			}
+		}
 		// makes loop exit if user wants to stop
-		else if (opselection == "exit" || opselection == "stop" || opselection == "quit")
-			choice = false;
+		choice = num.doesUserContinue();
 	}
+	cout << endl << "Goodbye then.";
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

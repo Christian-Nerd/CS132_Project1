@@ -23,16 +23,20 @@ void RationalNumber::setRationalNumber(istream& in)
 } // Gets the rational number from the user
 bool RationalNumber::checkValidRationalNumber(string& num) 
 {
+	int SlashCount = 0;
 	for (int i = 0; i < num.size(); i++) 
 	{
-		// Checks if the inputed number has whitespace or alphabetic characters
-		if (isspace(num.at(i)) || isalpha(num.at(i)) || num.at(i) == '.')
+		// Checks if the inputed number has whitespace or alphabetic character
+		if (isspace(num.at(i)) || isalpha(num.at(i)) || num.at(i) == '.' || SlashCount > 1)
 		{
 			cout << " Invalid rational number as it must be in the form \"int/int\" with no whitespace.";
-			cin.ignore(INT_MAX);
+			cout << endl;
 			cin.clear();
+			cin.ignore(INT_MAX, '\n');
 			return false;
 		}
+		if (num[i] == '/')
+			SlashCount++;
 	}
 	return true;
 }
@@ -70,7 +74,19 @@ void RationalNumber::setDen(int value)
 {
 	denominator = value;
 }
+bool RationalNumber::doesUserContinue() 
+{
+	bool choice = true;
+	string Decision;
+	cout  << endl << "Do you wish to continue y/n? " << endl;
+	cin >> Decision;
+	if (Decision == "exit" || Decision == "stop" || Decision == "quit" || Decision == "no" || Decision == "n")
+	       choice = false;
+	else if (Decision == "yes" || Decision == "y" || Decision == "continue")
+		   choice = true;
 
+	return choice;
+}
 RationalNumber RationalNumber::operator+(RationalNumber& num2)
 {
 	RationalNumber output;
@@ -94,13 +110,14 @@ RationalNumber RationalNumber::operator-(RationalNumber& num2)
 	RationalNumber output;
 	// Multiples numerator and denominator of both numbers by each other's demonator
 	numerator *= num2.getDen();
-	denominator *= num2.getDen();
-	num2.setNum(num2.getNum() * denominator);
-	num2.setDen(num2.getDen() * denominator);
+	int tempdenominator = denominator; // Stores old value of demoninator
+	denominator *= num2.getDen(); // Changes demoninator
+	num2.setNum(num2.getNum() * tempdenominator);
+	num2.setDen(num2.getDen() * tempdenominator);
 	// Set the output
-	output.setNum(numerator - num2.getNum() );
+	output.setNum(num2.getNum() - numerator);
 	output.setDen(denominator);
-	//SImplify the fraction after the operation
+	//Simplify the fraction after the operation
 	simplifyRationalNumber(*this);
 	simplifyRationalNumber(num2);
 	simplifyRationalNumber(output);
@@ -110,7 +127,7 @@ RationalNumber RationalNumber::operator* (RationalNumber& num2)
 {
 	RationalNumber output;
 	output.setNum(numerator * num2.getNum());
-	output.setDen(denominator);
+	output.setDen(denominator * num2.getDen());
 	simplifyRationalNumber(output);
 	return output;
 }
@@ -152,16 +169,3 @@ istream& operator>>(istream& in, RationalNumber& num)
 	num.setRationalNumber(in);
 	return in;
 } 
-bool doesUserContinue() 
-{
-	bool choice = true;
-	string Decision;
-	cout  << endl << "Do you wish to continue y/n? " << endl;
-	cin >> Decision;
-	if (Decision == "exit" || Decision == "stop" || Decision == "quit" || Decision == "no" || Decision == "n")
-			choice = false;
-	else if (Decision == "yes" || Decision == "y" || Decision == "continue")
-			choice = true;
-
-	return choice;
-}
