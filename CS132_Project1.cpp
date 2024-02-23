@@ -25,7 +25,7 @@ int main()
 			switch (opselection[0])
 			{
 			case '+':
-				cout << "Great please input your next operand";
+				cout << "Great please input your next operand: ";
 				num1.setRationalNumber(cin);
 				num2 = num1 + num;
 				cout << num2;

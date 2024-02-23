@@ -15,6 +15,11 @@ void RationalNumber::setRationalNumber(istream& in)
 		denominator = 1;
 		return;
 	}
+	else 
+	{
+		numerator = std::stoi(rationalNumber.substr(0, rationalNumber.find_first_of('/')));
+		denominator = std::stoi(rationalNumber.substr(rationalNumber.find_first_of('/') + 1));
+	}
 } // Gets the rational number from the user
 bool RationalNumber::checkValidRationalNumber(string& num) 
 {
@@ -34,14 +39,16 @@ bool RationalNumber::checkValidRationalNumber(string& num)
 void RationalNumber::simplifyRationalNumber(RationalNumber& num)
 {
 	// Factor the fraction
-	while (num.getNum() % num.getDen() != 0)
+	int GreatestCommonFactor = num.getDen(), Dividend = num.getNum();
+	while (Dividend % GreatestCommonFactor != 0)
 	{
-		num.setDen(num.getNum() % num.getDen()); // Sets denominator to the remainder of the division
-		num.setNum(num.getDen()); // Sets numerator to the divisor
+		int previousDenominator = GreatestCommonFactor; // Stores the previous denominator
+		GreatestCommonFactor = Dividend % previousDenominator; // Sets denominator to the remainder of the division
+		Dividend = previousDenominator; // Sets numerator to the divisor
 	}
 	// Simplify the fraction
-	num.setNum(num.getNum()/num.getDen());
-	num.setDen(num.getDen()/num.getDen());
+	num.setNum(num.getNum()/GreatestCommonFactor);
+	num.setDen(num.getDen()/GreatestCommonFactor);
 }
 void RationalNumber::outputRationalNumber(ostream& out) 
 {
@@ -69,9 +76,10 @@ RationalNumber RationalNumber::operator+(RationalNumber& num2)
 	RationalNumber output;
 	// Multiples numerator and denominator of both numbers by each other's demonator
 	numerator *= num2.getDen();
-	denominator *= num2.getDen();
-	num2.setNum(num2.getNum() * denominator);
-	num2.setDen(num2.getDen() * denominator);
+	int tempdenominator = denominator; // Stores old value of demoninator
+	denominator *= num2.getDen(); // Changes demoninator
+	num2.setNum(num2.getNum() * tempdenominator);
+	num2.setDen(num2.getDen() * tempdenominator);
 	// Set the output
 	output.setNum(num2.getNum() + numerator);
 	output.setDen(denominator);
@@ -146,5 +154,14 @@ istream& operator>>(istream& in, RationalNumber& num)
 } 
 bool doesUserContinue() 
 {
-	return false;
+	bool choice = true;
+	string Decision;
+	cout  << endl << "Do you wish to continue y/n? " << endl;
+	cin >> Decision;
+	if (Decision == "exit" || Decision == "stop" || Decision == "quit" || Decision == "no" || Decision == "n")
+			choice = false;
+	else if (Decision == "yes" || Decision == "y" || Decision == "continue")
+			choice = true;
+
+	return choice;
 }
