@@ -17,6 +17,7 @@ int main()
 		cout << " input your operation ";
 		cin >> opselection;
 		opselection = opselection.substr(0, 2);
+		cin.ignore(INT_MAX, '\n'); // After truncating the substring ignoring any junk in the input buffer.
 		std::transform(opselection.begin(), opselection.end(), opselection.begin(), tolower); 
 		if (isspace(opselection[1]) || opselection.size() == 1)
 		{
@@ -138,8 +139,11 @@ int main()
 		}
 		// makes loop exit if user wants to stop
 		choice = num.doesUserContinue();
+		if(choice)
+			cout  << endl << "Input your rational number: ";
+		else
+			cout << endl << "Goodbye then.";
 	}
-	cout << endl << "Goodbye then.";
 	return 0;
 }
 
