@@ -41,7 +41,6 @@ class RationalNumber
 								   RationalNumber& // Right hand side value
 		); // Stream extraction operator
 	private:
-		string num; // This is the rational number
 		int numerator = 0, denominator = 1; // These numbers represent the top & bottom part of the fraction
 };
 #endif
