@@ -29,9 +29,9 @@ bool RationalNumber::checkValidRationalNumber(string& num)
 		if (isdigit) // Checks for digits
 			DigitCount++;
 		// Checks if the inputed number has whitespace or alphabetic character, has a decimal point, has too many slashes, has no decimal, or has a 0 denominator
-		if (isspace(num.at(i)) || isalpha(num.at(i)) || num.at(i) == '.' || SlashCount > 1 || DigitCount == 0 || (i + 1 < num.size() && num.at(i) == '/' && isspace(num.at(i+1) || num.at(i+1) == '0')))
+		if (isspace(num.at(i)) || isalpha(num.at(i)) || num.at(i) == '.' || SlashCount > 1 || DigitCount == 0 || (i + 1 < num.size() && num.at(i) == '/' && isspace(num.at(i+1))))
 		{
-			cout << " Invalid rational number as it must be in the form \"int/int\" with no whitespace and non-zero denominator.";
+			cout << " Invalid rational number as it must be in the form \"int/int\" with no whitespaceor.";
 			cout << endl;
 			cin.clear();
 			cin.ignore(INT_MAX, '\n');
@@ -56,9 +56,22 @@ void RationalNumber::simplifyRationalNumber(RationalNumber& num)
 	num.setNum(num.getNum()/GreatestCommonFactor);
 	num.setDen(num.getDen()/GreatestCommonFactor);
 }
-void RationalNumber::outputRationalNumber(ostream& out) 
+void RationalNumber::outputRationalNumber(ostream& out)
 {
-	out << " " << numerator << "/" << denominator;
+	if (denominator == 1)
+	{
+		simplifyRationalNumber(*this);
+		out << numerator;
+	}
+	else if (denominator == 0)
+	{
+		out << "#div0";
+	}
+	else
+	{
+		simplifyRationalNumber(*this);
+		out << " " << numerator << "/" << denominator;
+	}
 }
 int RationalNumber::getNum() 
 {
@@ -102,8 +115,6 @@ RationalNumber RationalNumber::operator+(RationalNumber& num2)
 	output.setNum(num2.getNum() + numerator);
 	output.setDen(denominator);
 	//Simplify the fraction after the operation
-	simplifyRationalNumber(*this);
-	simplifyRationalNumber(num2);
 	simplifyRationalNumber(output);
 	return output;
 }
@@ -120,8 +131,6 @@ RationalNumber RationalNumber::operator-(RationalNumber& num2)
 	output.setNum(num2.getNum() - numerator);
 	output.setDen(denominator);
 	//Simplify the fraction after the operation
-	simplifyRationalNumber(*this);
-	simplifyRationalNumber(num2);
 	simplifyRationalNumber(output);
 	return output;
 }
